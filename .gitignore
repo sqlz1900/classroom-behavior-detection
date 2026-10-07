@@ -5,6 +5,8 @@
 !.gitignore
 !README.md
 !README-gitee.md
+!publish.sh
+!发布.bat
 !docs/
 docs/**
 !docs/项目介绍.html
