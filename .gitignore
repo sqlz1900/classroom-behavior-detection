@@ -4,11 +4,14 @@
 # 白名单
 !.gitignore
 !README.md
+!README-gitee.md
 !docs/
 docs/**
 !docs/项目介绍.html
 !docs/开发计划.md
 !docs/计划审阅.md
 !docs/训练数据指引.md
+!docs/wechat_id.png
+!docs/联系方式卡.html
 !docs/screenshots/
 !docs/screenshots/*.png

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #333; font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+.card {
+  width: 900px; margin: 20px auto; position: relative;
+  background: linear-gradient(150deg, #0d1626 0%, #13253f 55%, #0f3050 100%);
+  color: #eef3fb; border-radius: 18px; overflow: hidden;
+}
+.card::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(500px 260px at 85% 6%, rgba(64,140,255,.16), transparent 60%);
+  pointer-events: none;
+}
+.pad { padding: 44px 48px 38px; display: flex; gap: 36px; align-items: center; }
+.left { flex: 1; }
+.left h1 { font-size: 34px; letter-spacing: 1px; line-height: 1.35; }
+.left h1 .ac { color: #57a8ff; }
+.divider { width: 64px; height: 4px; background: #57a8ff; border-radius: 2px; margin: 16px 0 18px; }
+.left p { font-size: 19px; color: #b7c6dc; line-height: 1.9; }
+.left p b { color: #6cc2ff; }
+.acct { margin-top: 18px; background: rgba(13,22,38,.8); border: 1px solid #2e4568;
+  border-radius: 12px; padding: 16px 20px; font-size: 19px; line-height: 2.0; color: #d5e2f4; }
+.acct .k { color: #8ea0ba; display: inline-block; width: 108px; }
+.acct .v { font-family: Consolas, monospace; color: #6cc2ff; }
+.acct .v.warn { color: #ffb45e; }
+.qrbox { flex: none; text-align: center; }
+.qrbox .frame {
+  width: 260px; height: 260px; background: #fff; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  border: 3px solid #57a8ff; box-shadow: 0 12px 36px rgba(0,0,0,.5);
+}
+.qrbox img { width: 236px; height: 236px; display: block; }
+.qrbox .tip { margin-top: 12px; font-size: 20px; color: #9cc8ff; font-weight: 700; letter-spacing: 2px; }
+.qrbox .id { margin-top: 6px; font-family: Consolas, monospace; font-size: 22px; color: #ffb45e; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="pad">
+    <div class="left">
+      <h1>🎓 课堂行为检测系统<br><span class="ac">完整版获取方式</span></h1>
+      <div class="divider"></div>
+      <p><b>YOLO11 + Vue3 + SpringBoot + Flask</b> 全栈源码<br>
+      含训练模型 / 数据库 / 全套文档 / 一键脚本<br>
+      <b>远程协助部署，跑不通全额退</b></p>
+      <div class="acct">
+        <div><span class="k">微信</span><span class="v">sqlz1900</span></div>
+        <div><span class="k">获取内容</span><span class="v">源码包 + 部署指导</span></div>
+        <div><span class="k">备注</span><span class="v warn">来意（项目名），秒通过</span></div>
+      </div>
+    </div>
+    <div class="qrbox">
+      <div class="frame"><img src="qr_wechat.png" alt="微信二维码"></div>
+      <div class="tip">微信扫码 加我</div>
+      <div class="id">sqlz1900</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
