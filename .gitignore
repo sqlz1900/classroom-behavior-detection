@@ -1,0 +1,14 @@
+# 忽略一切——本仓库只放白名单内容
+*
+
+# 白名单
+!.gitignore
+!README.md
+!docs/
+docs/**
+!docs/项目介绍.html
+!docs/开发计划.md
+!docs/计划审阅.md
+!docs/训练数据指引.md
+!docs/screenshots/
+!docs/screenshots/*.png

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>学生课堂行为检测系统 · 项目介绍</title>
+<style>
+:root {
+  --bg: #0f1419;
+  --card: #1a2029;
+  --border: #2c3440;
+  --text: #e5eaf3;
+  --sub: #8a919f;
+  --primary: #4a9eff;
+  --green: #50c878;
+  --orange: #ff8c00;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'PingFang SC', 'Microsoft YaHei', -apple-system, sans-serif;
+  line-height: 1.7; padding-bottom: 80px;
+}
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+/* hero */
+.hero {
+  background: linear-gradient(135deg, #16202e 0%, #1f3350 60%, #16324a 100%);
+  padding: 72px 24px 56px; text-align: center; border-bottom: 1px solid var(--border);
+}
+.hero h1 { font-size: 40px; letter-spacing: 2px; }
+.hero h1 .accent { color: var(--primary); }
+.hero .sub { color: var(--sub); margin-top: 14px; font-size: 16px; }
+.badges { margin-top: 26px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.badge {
+  background: rgba(74,158,255,.12); border: 1px solid rgba(74,158,255,.35);
+  color: #9cc8ff; border-radius: 20px; padding: 5px 16px; font-size: 13px;
+}
+.badge.green { background: rgba(80,200,120,.1); border-color: rgba(80,200,120,.35); color: #8fe0ae; }
+.badge.orange { background: rgba(255,140,0,.1); border-color: rgba(255,140,0,.35); color: #ffbe6b; }
+
+/* sections */
+section { margin-top: 64px; }
+h2 {
+  font-size: 26px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px;
+}
+h2::before { content: ''; width: 5px; height: 24px; background: var(--primary); border-radius: 3px; }
+.desc { color: var(--sub); margin-bottom: 24px; font-size: 15px; }
+.card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+  padding: 24px; margin-bottom: 20px;
+}
+
+/* arch */
+.arch {
+  font-family: 'Consolas', monospace; font-size: 13.5px; line-height: 1.9;
+  color: #b8c4d4; overflow-x: auto; white-space: pre;
+}
+.arch .hl { color: var(--primary); font-weight: bold; }
+.arch .dim { color: #5c6672; }
+
+/* stats */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.stat { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+.stat .num { font-size: 30px; font-weight: 800; color: var(--primary); }
+.stat .num.green { color: var(--green); }
+.stat .num.orange { color: var(--orange); }
+.stat .lbl { color: var(--sub); font-size: 13px; margin-top: 4px; }
+
+/* screenshots */
+.shot { margin-bottom: 36px; }
+.shot h3 { font-size: 17px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.shot h3 .tag {
+  background: rgba(74,158,255,.15); color: #9cc8ff; font-size: 12px;
+  border-radius: 6px; padding: 2px 10px; font-weight: normal;
+}
+.shot p { color: var(--sub); font-size: 14px; margin-bottom: 12px; }
+.shot img {
+  width: 100%; border-radius: 10px; border: 1px solid var(--border);
+  box-shadow: 0 8px 30px rgba(0,0,0,.4); display: block;
+}
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media (max-width: 900px) { .grid2 { grid-template-columns: 1fr; } .stats { grid-template-columns: repeat(2,1fr); } }
+
+/* tech table */
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { padding: 11px 14px; border-bottom: 1px solid var(--border); text-align: left; }
+th { color: var(--sub); font-weight: 600; width: 140px; }
+td code { background: #0d1117; border: 1px solid var(--border); border-radius: 5px; padding: 2px 8px; color: #9cc8ff; font-size: 13px; }
+
+/* tree */
+.tree {
+  font-family: 'Consolas', monospace; font-size: 13px; line-height: 1.85;
+  color: #a8b4c4; overflow-x: auto; white-space: pre; padding: 20px;
+}
+.tree .d { color: #e8c66b; font-weight: bold; }
+.tree .f { color: #9cc8ff; }
+.tree .cm { color: #5c6672; font-style: italic; }
+
+/* api table */
+.api td:first-child { font-family: Consolas, monospace; color: #8fe0ae; font-size: 13px; white-space: nowrap; }
+.method { font-weight: bold; margin-right: 8px; }
+.get { color: #8fe0ae; } .post { color: #ffbe6b; }
+
+/* accounts */
+.acct { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 8px; }
+.acct .a { background: #0d1117; border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+.acct .a .u { font-family: Consolas, monospace; color: var(--primary); font-weight: bold; }
+.acct .a .p { font-family: Consolas, monospace; color: var(--orange); font-size: 13px; }
+.acct .a .r { color: var(--sub); font-size: 12px; margin-top: 4px; }
+
+footer { margin-top: 72px; text-align: center; color: #5c6672; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>🎓 学生课堂行为<span class="accent">检测系统</span></h1>
+  <div class="sub">基于 YOLO11 深度学习 · 图片 / 视频 / 摄像头三路实时检测 · 完整 RBAC 权限 · 可自定义训练</div>
+  <div class="badges">
+    <span class="badge">YOLO11 + PyTorch (CUDA)</span>
+    <span class="badge">Vue3 + TypeScript + Element Plus</span>
+    <span class="badge">Spring Boot 3 + MyBatis-Plus</span>
+    <span class="badge">Flask + OpenCV</span>
+    <span class="badge green">JWT + RBAC</span>
+    <span class="badge orange">mAP50 0.44 · 举手 0.81</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ============ 项目简介 ============ -->
+<section>
+  <h2>项目简介</h2>
+  <div class="card">
+    <p>本系统是一套<b>完整落地</b>的智慧课堂行为分析解决方案：通过教室摄像头（或上传图片/视频）实时检测学生
+    <b style="color:var(--green)">举手</b>、<b style="color:#5aa0ff">听讲</b>、<b style="color:#7b7bff">睡觉</b>、
+    <b style="color:var(--orange)">玩手机</b>、<b style="color:#c878ff">趴桌低头</b> 五类课堂行为，
+    异常行为自动触发预警并落库，配合统计看板呈现班级学情趋势。</p>
+    <p style="margin-top:12px">系统包含<b>四大子系统</b>：Vue3 前端（7+ 功能页面）、SpringBoot 业务后端（RBAC 权限 + 记录/预警/统计）、
+    Flask AI 推理服务（GPU 加速）、YOLO 训练管线（多数据源合并 + 一键训练部署）。支持用自己的数据集重训练并热替换线上模型。</p>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="num">13,996</div><div class="lbl">训练图片（4 个数据源）</div></div>
+    <div class="stat"><div class="num green">108,596</div><div class="lbl">标注框（5 类统一）</div></div>
+    <div class="stat"><div class="num">0.44</div><div class="lbl">总体 mAP50</div></div>
+    <div class="stat"><div class="num orange">0.81</div><div class="lbl">举手 mAP50</div></div>
+  </div>
+</section>
+
+<!-- ============ 系统架构 ============ -->
+<section>
+  <h2>系统架构</h2>
+  <div class="card">
+<div class="arch">
+<span class="dim">浏览器</span>  <span class="hl">Vue3 + Element Plus</span> (:5173)
+   <span class="dim">│</span>
+   <span class="dim">├─ 业务 API（axios + JWT）</span> ──────▶  <span class="hl">Spring Boot 3</span> (:8080) ──▶  MySQL <span class="dim">classroom_behavior</span>
+   <span class="dim">│</span>                                        <span class="dim">│  RBAC 拦截器 · 记录/预警落库 · 统计聚合</span>
+   <span class="dim">│</span>                                        <span class="dim">▼</span>
+   <span class="dim">└─ MJPEG 实时流（直连）</span> ─────────▶  <span class="hl">Flask AI 服务</span> (:5002)
+                                            <span class="dim">│  YOLO11 推理（RTX 4060 CUDA）</span>
+                                            <span class="dim">▼</span>
+                                       摄像头 / 图片 / 视频 <span class="dim">(OpenCV)</span></div>
+  </div>
+  <div class="card">
+    <table>
+      <tr><th>职责划分</th><th>说明</th></tr>
+      <tr><td><b>前端</b></td><td>登录鉴权、按角色显隐菜单、三路检测交互、预警中心、ECharts 看板、用户/日志管理；深色模式与色弱友好模式</td></tr>
+      <tr><td><b>SpringBoot</b></td><td>JWT 签发校验、RBAC 拦截器、检测代理转发与记录落库、AI 预警回调接收、班级/课程/用户/日志 CRUD、按天聚合统计</td></tr>
+      <tr><td><b>Flask AI</b></td><td>YOLO11 模型加载与 GPU 推理、图片/视频(异步任务)/摄像头逐帧检测、MJPEG 流输出、预警去抖+回调重试+本地日志兜底、模型热重载</td></tr>
+      <tr><td><b>训练管线</b></td><td>4 数据源类别重映射合并（7922→13996 图）、train/val 确定性切分、一键训练、best.pt 自动部署</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 功能截图 ============ -->
+<section>
+  <h2>运行截图</h2>
+  <p class="desc">以下为系统实际运行截图（1600×900 @1.5x，自动登录抓取）。</p>
+
+  <div class="shot">
+    <h3>登录页 <span class="tag">/login</span></h3>
+    <p>JWT 登录，全屏居中卡片；演示账号提示。未登录访问任意页面自动跳转至此。</p>
+    <img src="screenshots/00_login.png" alt="登录页">
+  </div>
+
+  <div class="shot">
+    <h3>实时监控 <span class="tag">/live</span></h3>
+    <p>摄像头逐帧检测 + MJPEG 推流，右侧实时统计各行为数量；支持「演示模式」标识与预警说明。</p>
+    <img src="screenshots/live.png" alt="实时监控">
+  </div>
+
+  <div class="shot">
+    <h3>图片检测 <span class="tag">/image</span></h3>
+    <p>拖拽/选择上传教室照片，返回标注框可视化图 + 五类行为计数 + 逐框置信度表格。</p>
+    <img src="screenshots/image.png" alt="图片检测">
+  </div>
+
+  <div class="grid2">
+    <div class="shot">
+      <h3>视频检测 <span class="tag">/video</span></h3>
+      <p>上传课堂视频，异步任务 10fps 抽帧推理，进度条实时反馈，输出标注视频与峰值统计。</p>
+      <img src="screenshots/video.png" alt="视频检测">
+    </div>
+    <div class="shot">
+      <h3>预警中心 <span class="tag">/alerts</span></h3>
+      <p>睡觉/玩手机/趴桌持续命中自动生成预警事件，支持确认处理流程与计数快照追溯。</p>
+      <img src="screenshots/alerts.png" alt="预警中心">
+    </div>
+  </div>
+
+  <div class="shot">
+    <h3>统计看板 <span class="tag">/dashboard</span></h3>
+    <p>ECharts 行为趋势折线图（近7天/30天切换），五类行为累计卡片，数据与检测记录联动。</p>
+    <img src="screenshots/dashboard.png" alt="统计看板">
+  </div>
+
+  <div class="grid2">
+    <div class="shot">
+      <h3>检测记录 <span class="tag">/records</span></h3>
+      <p>每次检测全量落库：来源、五类计数、总人数、标注图链接，支持按来源筛选与分页。</p>
+      <img src="screenshots/records.png" alt="检测记录">
+    </div>
+    <div class="shot">
+      <h3>用户管理 <span class="tag">/users</span> <span class="tag">admin</span></h3>
+      <p>RBAC 用户 CRUD：创建用户、重置密码、角色调整（admin/teacher/viewer）、启用禁用。</p>
+      <img src="screenshots/users.png" alt="用户管理">
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="shot">
+      <h3>操作日志 <span class="tag">/oplogs</span> <span class="tag">admin</span></h3>
+      <p>登录/登出/检测/用户变更/越权尝试（DENIED）全量审计，时间倒序分页。</p>
+      <img src="screenshots/oplogs.png" alt="操作日志">
+    </div>
+    <div class="shot">
+      <h3>班级课程 + 个人中心 <span class="tag">/classes</span> <span class="tag">/profile</span></h3>
+      <p>班级/课程维护；个人中心展示角色与权限点，支持自助修改密码（bcrypt 校验）。</p>
+      <img src="screenshots/classes.png" alt="班级课程">
+    </div>
+  </div>
+
+  <div class="shot">
+    <h3>系统设置 <span class="tag">/settings</span></h3>
+    <p>模型服务状态总览（设备/模式/权重文件）、一键热重载训练产物、深色与色弱模式、布局缩放。</p>
+    <img src="screenshots/settings.png" alt="系统设置">
+  </div>
+</section>
+
+<!-- ============ 技术栈 ============ -->
+<section>
+  <h2>技术栈</h2>
+  <div class="card">
+    <table>
+      <tr><th>前端</th><td><code>Vue 3.5</code> <code>TypeScript</code> <code>Element Plus</code> <code>Pinia</code> <code>Vue Router</code> <code>ECharts</code> <code>Axios</code> <code>Vite 5</code></td></tr>
+      <tr><th>后端</th><td><code>Spring Boot 3.3</code> <code>MyBatis-Plus 3.5</code> <code>JJWT 0.12</code> <code>BCrypt</code> <code>MySQL 8</code></td></tr>
+      <tr><th>AI 服务</th><td><code>Python 3.10</code> <code>Flask</code> <code>Ultralytics YOLO11</code> <code>PyTorch 2.5 (CUDA 12.1)</code> <code>OpenCV</code></td></tr>
+      <tr><th>训练</th><td><code>transfer-learning</code> <code>AMP 混合精度</code> <code>多数据源类别重映射</code> <code>SCB/CSB 公开数据集</code></td></tr>
+      <tr><th>工程化</th><td><code>免安装 JDK/Maven/Node 工具链</code> <code>清华/阿里镜像加速</code> <code>Playwright 自动截图</code> <code>一键 install/start/stop</code></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="cb-title" style="font-weight:700; margin-bottom:10px">核心指标（V2 模型 · 13996 图 / 108,596 框）</div>
+    <table>
+      <tr><th>类别</th><th>精度 P</th><th>召回 R</th><th>mAP50</th></tr>
+      <tr><td>举手 raise_hand</td><td>0.71</td><td>0.82</td><td><b style="color:var(--green)">0.806</b></td></tr>
+      <tr><td>听讲 listen</td><td>0.63</td><td>0.56</td><td>0.505</td></tr>
+      <tr><td><b>全体</b></td><td><b>0.45</b></td><td><b>0.46</b></td><td><b style="color:var(--primary)">0.439</b></td></tr>
+    </table>
+    <p style="color:var(--sub); font-size:13px; margin-top:10px">※ sleep/phone 类因公开数据稀缺样本不足（0/82 框），趴桌低头 0.005 为已知短板，可通过补充 Roboflow 标注数据迭代。</p>
+  </div>
+</section>
+
+<!-- ============ 项目结构 ============ -->
+<section>
+  <h2>项目结构</h2>
+  <div class="card">
+<div class="tree"><span class="d">classroom-behavior-detection/</span>
+├── <span class="d">ai-service/</span>                <span class="cm"># Flask AI 推理服务 (:5002)</span>
+│   ├── <span class="f">app.py</span>                 <span class="cm"># REST API：图片/视频(异步)/MJPEG流/预警回调</span>
+│   ├── <span class="f">detector.py</span>            <span class="cm"># YOLO11 封装：GPU推理/类别映射/绘图/热重载</span>
+│   ├── <span class="f">requirements.txt</span>
+│   ├── <span class="f">models/best.pt</span>         <span class="cm"># 部署的自训练模型</span>
+│   └── <span class="f">static/annotated/</span>      <span class="cm"># 标注图产物（按月归档）</span>
+├── <span class="d">backend/</span>                   <span class="cm"># SpringBoot 业务后端 (:8080)</span>
+│   ├── <span class="f">pom.xml</span>                <span class="cm"># Boot3.3 + MyBatis-Plus + JJWT + BCrypt</span>
+│   └── <span class="d">src/main/java/com/classroom/behavior/</span>
+│       ├── <span class="f">BehaviorApplication.java</span>
+│       ├── <span class="d">config/</span>            <span class="cm"># 拦截器/CORS/分页/全局异常</span>
+│       ├── <span class="d">controller/</span>        <span class="cm"># Auth(RBAC) / Detect / Alert / BaseData</span>
+│       ├── <span class="d">entity/</span>            <span class="cm"># 7 实体：记录/预警/班级/课程/用户/角色/日志</span>
+│       ├── <span class="d">mapper/</span>            <span class="cm"># MyBatis-Plus Mapper ×7</span>
+│       ├── <span class="d">security/</span>          <span class="cm"># JwtUtil / PermService / AuthInterceptor</span>
+│       └── <span class="d">service/</span>           <span class="cm"># AiProxyService（转发+落库+统计）</span>
+├── <span class="d">frontend/</span>                  <span class="cm"># Vue3 + TS + Element Plus (:5173)</span>
+│   └── <span class="d">src/</span>
+│       ├── <span class="f">api/index.ts</span>       <span class="cm"># axios封装/JWT存取/权限判断/全部接口</span>
+│       ├── <span class="f">router/index.ts</span>    <span class="cm"># 路由 + 登录守卫 + 权限守卫</span>
+│       ├── <span class="d">views/</span>             <span class="cm"># 12 个页面（登录/三路检测/看板/管理…）</span>
+│       └── <span class="f">App.vue</span>            <span class="cm"># 侧边栏按权限渲染 / 主题切换</span>
+├── <span class="d">training/</span>                  <span class="cm"># YOLO 训练管线</span>
+│   ├── <span class="f">train.py</span> / <span class="f">val.py</span>      <span class="cm"># 训练/验证（训练完自动部署best.pt）</span>
+│   ├── <span class="f">merge_datasets.py</span>      <span class="cm"># 多数据源合并：类别重映射+确定性切分</span>
+│   ├── <span class="f">dataset.yaml</span>           <span class="cm"># 5 类定义</span>
+│   └── <span class="d">dataset/ raw/</span>          <span class="cm"># 合并产物 / 原始数据集</span>
+├── <span class="d">database/</span>
+│   ├── <span class="f">schema.sql</span>             <span class="cm"># 业务库（5 表）</span>
+│   └── <span class="f">rbac_upgrade.sql</span>       <span class="cm"># RBAC 增量（用户/角色/日志）</span>
+├── <span class="d">scripts/</span>                   <span class="cm"># 一键 install / start / stop / resume-train</span>
+├── <span class="d">tools/</span>                     <span class="cm"># 免安装 JDK17 / Maven / Node 工具链</span>
+├── <span class="d">docs/</span>                      <span class="cm"># 开发计划/审阅/训练指引/截图/本页</span>
+└── <span class="f">README.md</span></div>
+  </div>
+</section>
+
+<!-- ============ API 一览 ============ -->
+<section>
+  <h2>核心 API</h2>
+  <div class="card">
+    <table class="api">
+      <tr><th style="width:280px">接口</th><th>说明</th><th style="width:120px">权限</th></tr>
+      <tr><td><span class="method post">POST</span>/api/auth/login</td><td>登录，返回 JWT + 权限点</td><td>公开</td></tr>
+      <tr><td><span class="method post">POST</span>/api/auth/change-password</td><td>修改自己密码（校验旧密码）</td><td>登录</td></tr>
+      <tr><td><span class="method post">POST</span>/api/detect/image</td><td>图片检测（代理 Flask）+ 记录落库</td><td>detect</td></tr>
+      <tr><td><span class="method post">POST</span>/api/detect/video</td><td>视频检测，返回异步 taskId</td><td>detect</td></tr>
+      <tr><td><span class="method post">POST</span>/api/detect/stream/start|stop</td><td>摄像头流控制（MJPEG 由前端直连 5002）</td><td>detect</td></tr>
+      <tr><td><span class="method get">GET</span>/api/detect/records · /stats</td><td>记录分页 / 按天聚合统计</td><td>登录</td></tr>
+      <tr><td><span class="method post">POST</span>/api/alerts/ai-callback</td><td>Flask 预警回调落库（内部）</td><td>内部</td></tr>
+      <tr><td><span class="method post">POST</span>/api/alerts/{id}/confirm</td><td>预警确认处理</td><td>alert_confirm</td></tr>
+      <tr><td><span class="method get">GET</span>/api/users · <span class="method post">POST</span>/api/users</td><td>用户列表 / 新增（重置密码、启停用、改角色）</td><td>user_manage</td></tr>
+      <tr><td><span class="method get">GET</span>/api/oplogs</td><td>操作日志分页</td><td>oplogs</td></tr>
+      <tr><td><span class="method post">POST</span>/api/detect/model/reload</td><td>热重载训练后的新模型</td><td>config_edit</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 快速开始 ============ -->
+<section>
+  <h2>快速开始</h2>
+  <div class="card">
+    <div class="acct">
+      <div class="a"><div class="u">admin / admin123</div><div class="r">管理员 · 全部权限</div></div>
+      <div class="a"><div class="u">teacher / 123456</div><div class="r">教师 · 检测与查看</div></div>
+      <div class="a"><div class="u">viewer（自行创建）</div><div class="r">访客 · 只读看板</div></div>
+    </div>
+    <p style="margin:18px 0 10px; color:var(--sub)">Windows 下双击 scripts/ 里的 .bat，或 git-bash 执行：</p>
+    <div class="arch">bash scripts/install.sh    <span class="dim"># 一键安装：conda/依赖/JDK/Maven/Node/MySQL自动检测补齐</span>
+bash scripts/start.sh      <span class="dim"># 一键启动：AI(:5002) + 后端(:8080) + 前端(:5173)</span>
+bash scripts/stop.sh       <span class="dim"># 一键停止</span>
+bash scripts/resume-train.sh  <span class="dim"># 训练中断后从 last.pt 续训</span></div>
+    <p style="margin-top:14px; color:var(--sub)">首次启动 AI 服务自动下载 yolo11n.pt 进入演示模式；用自己的数据集训练：
+    <code style="color:#9cc8ff">cd training && python merge_datasets.py && python train.py --epochs 100</code>，
+    完成后 best.pt 自动部署，前端「系统设置 → 重载模型」热替换生效。</p>
+  </div>
+</section>
+
+<footer>
+  学生课堂行为检测系统 · YOLO11 + Vue3 + SpringBoot + Flask · 2026<br>
+  数据来源：SCB-Dataset (Whiffe) / CSB-DATASET / Roboflow cellphone · 模型与代码仅供学习研究
+</footer>
+
+</div>
+</body>
+</html>
