@@ -26,11 +26,21 @@ else
 fi
 
 echo "═══ 3/4 推送 Gitee ═══"
-if git push -u gitee "$BRANCH" 2>&1; then
-  echo "  ✅ Gitee OK"
+# Gitee 新账号用 token+HTTPS 推送（SSH 认证的是老账号 heaboy）
+GT_FILE="../gitee_token.txt"
+if [ -f "$GT_FILE" ]; then
+  GT=$(cat "$GT_FILE" | tr -d '[:space:]')
+  if git push -u "https://sqlz1900:${GT}@gitee.com/sqlz1900/classroom-behavior-detection.git" "$BRANCH" 2>&1; then
+    echo "  ✅ Gitee OK (token)"
+  else
+    echo "  ❌ Gitee 失败——检查 token 是否过期/权限"
+  fi
 else
-  echo "  ❌ Gitee 失败——检查: ① gitee 账号是否已加对应公钥 ② 仓库是否已创建"
-  echo "     手动验证: ssh -T git@gitee.com"
+  if git push -u gitee "$BRANCH" 2>&1; then
+    echo "  ✅ Gitee OK (ssh)"
+  else
+    echo "  ❌ Gitee 失败——缺少 ../gitee_token.txt 或 SSH 认证账号不符"
+  fi
 fi
 
 echo "═══ 4/4 结果 ═══"
